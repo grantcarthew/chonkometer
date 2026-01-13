@@ -10,7 +10,8 @@ See [p-writing-guide.md](./p-writing-guide.md) for guidelines on creating and ma
 
 | Project | Title | Status | Started | Completed |
 |---------|-------|--------|---------|-----------|
-| P-001 | Project Initialization | Proposed | - | - |
+| P-001 | Project Initialization | Completed | 2025-12-18 | 2025-12-18 |
+| P-002 | Core CLI Functionality | Completed | 2025-12-18 | 2026-01-13 |
 
 Note: Completed projects are in `completed/`
 

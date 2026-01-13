@@ -12,7 +12,7 @@ Under active development.
 
 Projects are stored in the docs/projects/ directory. Update this when starting a new project.
 
-Active Project: docs/projects/p-002-cli-core-functionality.md
+Active Project: None
 
 ## Quick Reference
 
@@ -27,7 +27,7 @@ go build -ldflags "-X github.com/gcarthew/chonkometer/internal/cli.Version=1.0.0
 go test ./...
 
 # Usage
-ckm npx @anthropic/mcp-server-memory
+ckm npx -y @modelcontextprotocol/server-everything
 ```
 
 ---

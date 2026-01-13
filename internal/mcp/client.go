@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"os/exec"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
@@ -146,6 +145,3 @@ func fetchResourceTemplates(ctx context.Context, session *mcp.ClientSession, res
 	}
 	return nil
 }
-
-// Ensure io import is used (for potential future stderr capture)
-var _ = io.Discard

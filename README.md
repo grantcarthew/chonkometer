@@ -16,8 +16,8 @@ brew install gcarthew/tap/ckm
 
 ```bash
 # Measure token usage of an MCP server (runs the server as a subprocess)
-ckm npx @anthropic/mcp-server-memory
-ckm npx @anthropic/terraform-mcp-server
+ckm npx -y @modelcontextprotocol/server-memory
+ckm npx -y @modelcontextprotocol/server-filesystem
 ckm go run ./cmd/my-mcp-server
 
 # Show version

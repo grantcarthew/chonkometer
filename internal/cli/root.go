@@ -29,7 +29,7 @@ before installing them. It connects to a server, fetches all definitions
 
 Example:
   ckm npx -y @modelcontextprotocol/server-everything
-  ckm npx @anthropic/mcp-server-memory
+  ckm npx -y @modelcontextprotocol/server-memory
   ckm go run ./cmd/my-mcp-server`,
 	Version:           Version,
 	Args:              cobra.MinimumNArgs(1),
