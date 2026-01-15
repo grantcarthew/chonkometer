@@ -60,6 +60,22 @@ Chonkometer uses tiktoken (cl100k_base) for fast, offline token counting. Valida
 
 *Validated 2026-01-15 against Vertex AI Claude count-tokens API. See [docs/validate-claude-tokens.md](docs/validate-claude-tokens.md) for methodology.*
 
+## MCP Examples
+
+```bash
+# Reference servers
+chonkometer npx -y @modelcontextprotocol/server-everything
+chonkometer npx -y @modelcontextprotocol/server-filesystem /tmp
+chonkometer npx -y @modelcontextprotocol/server-memory
+chonkometer npx -y @modelcontextprotocol/server-sequential-thinking
+chonkometer npx -y @modelcontextprotocol/server-github
+chonkometer npx -y @modelcontextprotocol/server-puppeteer
+
+# Third-party servers
+chonkometer npx -y chrome-devtools-mcp
+chonkometer npx -y @playwright/mcp
+```
+
 ## Tech Stack
 
 - Go
