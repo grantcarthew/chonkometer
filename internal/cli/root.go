@@ -3,6 +3,7 @@ package cli
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"os"
 	"sort"
@@ -12,6 +13,8 @@ import (
 	"github.com/gcarthew/chonkometer/internal/tokens"
 	"github.com/spf13/cobra"
 )
+
+var jsonFlag bool
 
 // Execute runs the root command.
 func Execute() {
@@ -40,6 +43,7 @@ Example:
 
 func init() {
 	rootCmd.SetVersionTemplate("ckm version {{.Version}}\n")
+	rootCmd.Flags().BoolVar(&jsonFlag, "json", false, "output raw definitions as JSON for validation")
 	// Disable flag parsing after the first positional argument
 	// so flags like -y are passed to the subprocess command
 	rootCmd.Flags().SetInterspersed(false)
@@ -58,6 +62,33 @@ type itemResult struct {
 	tokens int
 }
 
+// JSON output types for --json flag.
+type jsonOutput struct {
+	Server      jsonServer       `json:"server,omitempty"`
+	Definitions []jsonDefinition `json:"definitions"`
+	Summary     jsonSummary      `json:"summary"`
+}
+
+type jsonServer struct {
+	Name    string `json:"name,omitempty"`
+	Version string `json:"version,omitempty"`
+}
+
+type jsonDefinition struct {
+	Type   string `json:"type"`
+	Name   string `json:"name"`
+	JSON   string `json:"json"`
+	Tokens int    `json:"tokens"`
+}
+
+type jsonSummary struct {
+	Tools     int `json:"tools"`
+	Prompts   int `json:"prompts"`
+	Resources int `json:"resources"`
+	Templates int `json:"templates"`
+	Total     int `json:"total"`
+}
+
 func run(cmd *cobra.Command, args []string) error {
 	ctx := context.Background()
 
@@ -73,6 +104,11 @@ func run(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("fetching definitions: %w", err)
 	}
 
+	// JSON output mode
+	if jsonFlag {
+		return printJSON(result, counter)
+	}
+
 	// Count tokens for each category
 	categories := []categoryResult{
 		countCategory("Tools", result.Tools, counter),
@@ -85,6 +121,53 @@ func run(cmd *cobra.Command, args []string) error {
 	printResults(result.Server, categories, result.Warnings)
 
 	return nil
+}
+
+func printJSON(result *mcp.FetchResult, counter *tokens.Counter) error {
+	out := jsonOutput{
+		Server: jsonServer{
+			Name:    result.Server.Name,
+			Version: result.Server.Version,
+		},
+	}
+
+	// Process all definitions
+	allDefs := []struct {
+		typeName string
+		defs     []mcp.Definition
+	}{
+		{"tool", result.Tools},
+		{"prompt", result.Prompts},
+		{"resource", result.Resources},
+		{"template", result.Templates},
+	}
+
+	for _, category := range allDefs {
+		for _, def := range category.defs {
+			tokenCount := counter.Count(def.JSON)
+			out.Definitions = append(out.Definitions, jsonDefinition{
+				Type:   category.typeName,
+				Name:   def.Name,
+				JSON:   def.JSON,
+				Tokens: tokenCount,
+			})
+			out.Summary.Total += tokenCount
+			switch category.typeName {
+			case "tool":
+				out.Summary.Tools++
+			case "prompt":
+				out.Summary.Prompts++
+			case "resource":
+				out.Summary.Resources++
+			case "template":
+				out.Summary.Templates++
+			}
+		}
+	}
+
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	return enc.Encode(out)
 }
 
 func countCategory(name string, defs []mcp.Definition, counter *tokens.Counter) categoryResult {
@@ -130,29 +213,13 @@ func printResults(server mcp.ServerInfo, categories []categoryResult, warnings [
 	fmt.Printf("%18s ─────────────\n", "")
 	fmt.Printf("%-12s       ~%s tokens\n", "Total:", formatNumber(totalTokens))
 
-	// Calculate Claude Code in-context estimate
-	// Research from mcp-code-wrapper shows Claude Code uses ~600-700 tokens TOTAL per tool
-	// including mcp__ prefix, formatting, and system prompt integration.
-	// Source: https://github.com/paddo/mcp-code-wrapper
-	// Chrome DevTools: 26 tools = 17,500 tokens (~673 total per tool)
-	// MSSQL Database: 16 tools = 11,200 tokens (~700 total per tool)
-	var toolCount, promptCount, resourceCount, templateCount int
-	for _, cat := range categories {
-		switch cat.name {
-		case "Tools":
-			toolCount = cat.count
-		case "Prompts":
-			promptCount = cat.count
-		case "Resources":
-			resourceCount = cat.count
-		case "Templates":
-			templateCount = cat.count
-		}
-	}
-	// Estimate ~550 tokens total per tool, ~250 per prompt, ~50 per resource/template
-	// Based on observed: terraform-mcp (10 tools, 5 prompts) = ~6.8k tokens in Claude Code
-	estimated := (toolCount * 550) + (promptCount * 250) + (resourceCount * 50) + (templateCount * 50)
-	fmt.Printf("%-12s       ~%s tokens (estimated)\n", "In-context:", formatNumber(estimated))
+	// Calculate Claude estimate using validated correction factor.
+	// Validation against Vertex AI Claude count-tokens API shows tiktoken (cl100k_base)
+	// undercounts by ~19% compared to Claude's tokenizer. See docs/validate-claude-tokens.md
+	// for methodology and detailed results across 7 MCP servers and 106 definitions.
+	const claudeCorrectionFactor = 1.23
+	estimated := int(float64(totalTokens) * claudeCorrectionFactor)
+	fmt.Printf("%-12s       ~%s tokens (estimate)\n", "Claude:", formatNumber(estimated))
 
 	// Print largest items from the category with most tokens
 	var largestCategory *categoryResult

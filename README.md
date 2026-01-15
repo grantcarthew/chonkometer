@@ -27,20 +27,38 @@ ckm --version
 ## Example Output
 
 ```
-Server: terraform-mcp-server v1.0.0
+Server: memory-server v0.6.3
 
-Tools:          12    (4,230 tokens)
-Prompts:         0        (0 tokens)
-Resources:       3      (156 tokens)
-Templates:       2       (89 tokens)
-                      ─────────────
-Total:                 ~4,475 tokens
+Tools:           9    (3,483 tokens)
+Prompts:         0    (0 tokens)
+Resources:       0    (0 tokens)
+Templates:       0    (0 tokens)
+                   ─────────────
+Total:             ~3,483 tokens
+Claude:            ~4,284 tokens (estimate)
 
 Largest tools:
-  1. terraform_plan        1,245 tokens
-  2. terraform_apply         892 tokens
-  3. terraform_init          654 tokens
+  1. open_nodes               488 tokens
+  2. search_nodes             482 tokens
+  3. create_entities          444 tokens
 ```
+
+## Token Accuracy
+
+Chonkometer uses tiktoken (cl100k_base) for fast, offline token counting. Validation against Claude's official tokenizer shows tiktoken undercounts by ~19%. The "Claude" estimate applies a 1.23x correction factor.
+
+| Server | Tools | tiktoken | Claude (actual) | Ratio |
+|--------|------:|----------|-----------------|-------|
+| Memory | 9 | 3,483 | 4,243 | 1.22x |
+| Sequential Thinking | 1 | 1,183 | 1,400 | 1.18x |
+| Filesystem | 14 | 3,752 | 4,589 | 1.22x |
+| Everything | 26 | 2,630 | 3,321 | 1.26x |
+| GitHub | 26 | 5,898 | 7,307 | 1.24x |
+| Puppeteer | 8 | 896 | 1,108 | 1.24x |
+| Playwright | 22 | 4,373 | 5,399 | 1.23x |
+| **Total** | **106** | **22,215** | **27,367** | **1.23x** |
+
+*Validated 2026-01-15 against Vertex AI Claude count-tokens API. See [docs/validate-claude-tokens.md](docs/validate-claude-tokens.md) for methodology.*
 
 ## Tech Stack
 
