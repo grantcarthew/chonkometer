@@ -47,16 +47,16 @@ Largest tools:
 
 Chonkometer uses tiktoken (cl100k_base) for fast, offline token counting. Validation against Claude's official tokenizer shows tiktoken undercounts by ~19%. The "Claude" estimate applies a 1.23x correction factor.
 
-| Server | Tools | chonkometer | Claude (actual) | Ratio |
-|--------|------:|-------------|-----------------|-------|
-| Memory | 9 | 3,483 | 4,243 | 1.22x |
-| Sequential Thinking | 1 | 1,183 | 1,400 | 1.18x |
-| Filesystem | 14 | 3,752 | 4,589 | 1.22x |
-| Everything | 26 | 2,630 | 3,321 | 1.26x |
-| GitHub | 26 | 5,898 | 7,307 | 1.24x |
-| Puppeteer | 8 | 896 | 1,108 | 1.24x |
-| Playwright | 22 | 4,373 | 5,399 | 1.23x |
-| **Total** | **106** | **22,215** | **27,367** | **1.23x** |
+| Server | Tools | tiktoken | Claude (actual) | chonkometer | Ratio |
+|--------|------:|----------|-----------------|-------------|-------|
+| Memory | 9 | 3,483 | 4,243 | 4,284 | 1.22x |
+| Sequential Thinking | 1 | 1,183 | 1,400 | 1,455 | 1.18x |
+| Filesystem | 14 | 3,752 | 4,589 | 4,615 | 1.22x |
+| Everything | 26 | 2,630 | 3,321 | 3,235 | 1.26x |
+| GitHub | 26 | 5,898 | 7,307 | 7,255 | 1.24x |
+| Puppeteer | 8 | 896 | 1,108 | 1,102 | 1.24x |
+| Playwright | 22 | 4,373 | 5,399 | 5,379 | 1.23x |
+| **Total** | **106** | **22,215** | **27,367** | **27,324** | **1.23x** |
 
 *Validated 2026-01-15 against Vertex AI Claude count-tokens API. See [docs/validate-claude-tokens.md](docs/validate-claude-tokens.md) for methodology.*
 
