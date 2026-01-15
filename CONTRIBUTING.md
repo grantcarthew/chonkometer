@@ -22,7 +22,7 @@ When reporting bugs, please:
 
 1. Check [existing issues](https://github.com/grantcarthew/chonkometer/issues) first
 2. Provide:
-   - chonkometer version: `ckm --version`
+   - chonkometer version: `chonkometer --version`
    - Operating system and version
    - Full command that triggered the bug
    - Complete error message or unexpected output
@@ -45,17 +45,17 @@ cd chonkometer
 go mod download
 
 # Build the project
-go build -o ckm ./cmd/ckm
+go build -o chonkometer ./cmd/chonkometer
 
 # Verify installation
-./ckm --version
+./chonkometer --version
 ```
 
 ### Project Structure
 
 ```
 chonkometer/
-├── cmd/ckm/main.go       # Entrypoint
+├── cmd/chonkometer/main.go       # Entrypoint
 ├── internal/
 │   ├── cli/              # Cobra commands
 │   ├── mcp/              # MCP client wrapper
@@ -151,7 +151,7 @@ refactor(cli): simplify output formatting
    - Update documentation if changing CLI interface
 4. **Test thoroughly:**
    - Run all tests: `go test -v ./...`
-   - Build successfully: `go build ./cmd/ckm`
+   - Build successfully: `go build ./cmd/chonkometer`
 5. **Submit pull request:**
    - Reference related issue(s)
    - Describe what changed and why

@@ -1,6 +1,6 @@
 # chonkometer
 
-CLI tool to measure MCP server token consumption before installation. Command: `ckm`
+CLI tool to measure MCP server token consumption before installation. Command: `chonkometer`
 
 See <https://agents.md/> for the full AGENTS.md specification as this project matures.
 
@@ -18,16 +18,16 @@ Active Project: None
 
 ```bash
 # Build
-go build -o ckm ./cmd/ckm
+go build -o chonkometer ./cmd/chonkometer
 
 # Build with version
-go build -ldflags "-X github.com/gcarthew/chonkometer/internal/cli.Version=1.0.0" -o ckm ./cmd/ckm
+go build -ldflags "-X github.com/gcarthew/chonkometer/internal/cli.Version=1.0.0" -o chonkometer ./cmd/chonkometer
 
 # Test
 go test ./...
 
 # Usage
-ckm npx -y @modelcontextprotocol/server-everything
+chonkometer npx -y @modelcontextprotocol/server-everything
 ```
 
 ---

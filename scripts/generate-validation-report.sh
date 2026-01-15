@@ -16,7 +16,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-CKM="$PROJECT_ROOT/ckm"
+CKM="$PROJECT_ROOT/chonkometer"
 OUTPUT_FILE="$PROJECT_ROOT/docs/validate-claude-tokens.md"
 
 # Vertex AI settings
@@ -70,11 +70,11 @@ check_deps() {
     export PROJECT_ID
 }
 
-# Build ckm if needed
-build_ckm() {
-    if [[ ! -f "$CKM" ]] || [[ "$PROJECT_ROOT/cmd/ckm/main.go" -nt "$CKM" ]]; then
-        echo "Building ckm..."
-        (cd "$PROJECT_ROOT" && go build -o ckm ./cmd/ckm)
+# Build chonkometer if needed
+build_chonkometer() {
+    if [[ ! -f "$CKM" ]] || [[ "$PROJECT_ROOT/cmd/chonkometer/main.go" -nt "$CKM" ]]; then
+        echo "Building chonkometer..."
+        (cd "$PROJECT_ROOT" && go build -o chonkometer ./cmd/chonkometer)
     fi
 }
 
@@ -108,7 +108,7 @@ validate_server() {
 
     echo "  Validating: $name" >&2
 
-    # Get JSON output from ckm
+    # Get JSON output from chonkometer
     local json_output
     if ! json_output=$("$CKM" --json "${cmd[@]}" 2>/dev/null); then
         echo "    FAILED: could not connect" >&2
@@ -318,7 +318,7 @@ IMPLICATIONS
     echo "" >> "$OUTPUT_FILE"
     cat >> "$OUTPUT_FILE" << 'METHODOLOGY'
 1. Each MCP server is started via `npx`
-2. `ckm --json` fetches all tool/prompt/resource definitions
+2. `chonkometer --json` fetches all tool/prompt/resource definitions
 3. Each definition's JSON is sent to the Vertex AI Claude count-tokens API
 4. Results are compared against tiktoken's cl100k_base counts
 5. Ratios and differences are calculated
@@ -343,7 +343,7 @@ main() {
     echo ""
 
     check_deps
-    build_ckm
+    build_chonkometer
 
     local results_file
     results_file=$(mktemp)

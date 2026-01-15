@@ -1,7 +1,7 @@
 #!/bin/bash
 # Validate chonkometer token counts against Claude's official tokenizer
 #
-# This script compares tiktoken (cl100k_base) counts from ckm against
+# This script compares tiktoken (cl100k_base) counts from chonkometer against
 # the Vertex AI Claude count-tokens API to measure accuracy.
 #
 # Requirements:
@@ -20,7 +20,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-CKM="$PROJECT_ROOT/ckm"
+CKM="$PROJECT_ROOT/chonkometer"
 
 # Vertex AI settings
 LOCATION="us-east5"
@@ -68,11 +68,11 @@ check_deps() {
     fi
 }
 
-# Build ckm if needed
-build_ckm() {
-    if [[ ! -f "$CKM" ]] || [[ "$PROJECT_ROOT/cmd/ckm/main.go" -nt "$CKM" ]]; then
-        echo -e "${BLUE}Building ckm...${NC}"
-        (cd "$PROJECT_ROOT" && go build -o ckm ./cmd/ckm)
+# Build chonkometer if needed
+build_chonkometer() {
+    if [[ ! -f "$CKM" ]] || [[ "$PROJECT_ROOT/cmd/chonkometer/main.go" -nt "$CKM" ]]; then
+        echo -e "${BLUE}Building chonkometer...${NC}"
+        (cd "$PROJECT_ROOT" && go build -o chonkometer ./cmd/chonkometer)
     fi
 }
 
@@ -102,10 +102,10 @@ count_claude_tokens() {
 validate() {
     local cmd=("$@")
 
-    echo -e "${BLUE}Running: ckm --json ${cmd[*]}${NC}"
+    echo -e "${BLUE}Running: chonkometer --json ${cmd[*]}${NC}"
     echo
 
-    # Get JSON output from ckm
+    # Get JSON output from chonkometer
     local json_output
     json_output=$("$CKM" --json "${cmd[@]}" 2>/dev/null)
 
@@ -194,7 +194,7 @@ validate() {
 
 # Main
 check_deps
-build_ckm
+build_chonkometer
 
 if [[ $# -eq 0 ]]; then
     # Default test server

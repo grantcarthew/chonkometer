@@ -217,7 +217,7 @@ Server: `Playwright`
 ## Methodology
 
 1. Each MCP server is started via `npx`
-2. `ckm --json` fetches all tool/prompt/resource definitions
+2. `chonkometer --json` fetches all tool/prompt/resource definitions
 3. Each definition's JSON is sent to the Vertex AI Claude count-tokens API
 4. Results are compared against tiktoken's cl100k_base counts
 5. Ratios and differences are calculated

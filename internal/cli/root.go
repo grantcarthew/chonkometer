@@ -24,16 +24,16 @@ func Execute() {
 }
 
 var rootCmd = &cobra.Command{
-	Use:   "ckm <command> [args...]",
+	Use:   "chonkometer <command> [args...]",
 	Short: "Measure MCP server token consumption",
 	Long: `Chonkometer measures the token usage of MCP (Model Context Protocol) servers
 before installing them. It connects to a server, fetches all definitions
 (tools, prompts, resources, templates), and counts the tokens.
 
 Example:
-  ckm npx -y @modelcontextprotocol/server-everything
-  ckm npx -y @modelcontextprotocol/server-memory
-  ckm go run ./cmd/my-mcp-server`,
+  chonkometer npx -y @modelcontextprotocol/server-everything
+  chonkometer npx -y @modelcontextprotocol/server-memory
+  chonkometer go run ./cmd/my-mcp-server`,
 	Version:           Version,
 	Args:              cobra.MinimumNArgs(1),
 	DisableAutoGenTag: true,
@@ -42,7 +42,7 @@ Example:
 }
 
 func init() {
-	rootCmd.SetVersionTemplate("ckm version {{.Version}}\n")
+	rootCmd.SetVersionTemplate("chonkometer version {{.Version}}\n")
 	rootCmd.Flags().BoolVar(&jsonFlag, "json", false, "output raw definitions as JSON for validation")
 	// Disable flag parsing after the first positional argument
 	// so flags like -y are passed to the subprocess command

@@ -12,13 +12,13 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-CKM="$PROJECT_ROOT/ckm"
+CKM="$PROJECT_ROOT/chonkometer"
 SUBSET="${1:-quick}"
 
 # Build if needed
 if [[ ! -f "$CKM" ]]; then
-    echo "Building ckm..."
-    (cd "$PROJECT_ROOT" && go build -o ckm ./cmd/ckm)
+    echo "Building chonkometer..."
+    (cd "$PROJECT_ROOT" && go build -o chonkometer ./cmd/chonkometer)
 fi
 
 # Counter for test numbering

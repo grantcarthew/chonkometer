@@ -9,19 +9,19 @@ MCP servers consume context window tokens by exposing tool definitions, prompts,
 ## Installation
 
 ```bash
-brew install gcarthew/tap/ckm
+brew install gcarthew/tap/chonkometer
 ```
 
 ## Usage
 
 ```bash
 # Measure token usage of an MCP server (runs the server as a subprocess)
-ckm npx -y @modelcontextprotocol/server-memory
-ckm npx -y @modelcontextprotocol/server-filesystem
-ckm go run ./cmd/my-mcp-server
+chonkometer npx -y @modelcontextprotocol/server-memory
+chonkometer npx -y @modelcontextprotocol/server-filesystem
+chonkometer go run ./cmd/my-mcp-server
 
 # Show version
-ckm --version
+chonkometer --version
 ```
 
 ## Example Output
@@ -71,10 +71,10 @@ Chonkometer uses tiktoken (cl100k_base) for fast, offline token counting. Valida
 
 ```bash
 # Build
-go build -o ckm ./cmd/ckm
+go build -o chonkometer ./cmd/chonkometer
 
 # Build with version
-go build -ldflags "-X github.com/gcarthew/chonkometer/internal/cli.Version=1.0.0" -o ckm ./cmd/ckm
+go build -ldflags "-X github.com/gcarthew/chonkometer/internal/cli.Version=1.0.0" -o chonkometer ./cmd/chonkometer
 
 # Test
 go test ./...

@@ -11,7 +11,7 @@
 reference/
 
 # Go Binary Output
-ckm
+/chonkometer
 *.exe
 *.exe~
 *.dll
