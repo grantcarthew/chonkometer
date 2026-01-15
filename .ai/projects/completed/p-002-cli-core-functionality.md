@@ -10,7 +10,7 @@ Implement the core chonkometer CLI that connects to an MCP server via stdio tran
 
 ## Goals
 
-1. Create project structure (cmd/ckm, internal/cli, internal/mcp, internal/tokens)
+1. Create project structure (cmd/chonkometer, internal/cli, internal/mcp, internal/tokens)
 2. Implement MCP client wrapper using the official Go SDK
 3. Implement token counting using tiktoken-go
 4. Build Cobra CLI with root command for stdio transport
@@ -37,9 +37,9 @@ Out of Scope:
 
 ## Success Criteria
 
-- [x] `go build ./cmd/ckm` produces working binary
-- [x] `ckm --version` displays version
-- [x] `ckm npx -y @modelcontextprotocol/server-everything` connects and displays token counts
+- [x] `go build ./cmd/chonkometer` produces working binary
+- [x] `chonkometer --version` displays version
+- [x] `chonkometer npx -y @modelcontextprotocol/server-everything` connects and displays token counts
 - [x] Output shows breakdown by category (tools, prompts, resources, templates)
 - [x] Output shows total token count
 - [x] `go test ./...` passes
@@ -49,7 +49,7 @@ Out of Scope:
 
 ## Verified MCP Server Packages
 
-These packages have been verified to exist and work with ckm:
+These packages have been verified to exist and work with chonkometer:
 
 | Package | Description |
 |---------|-------------|
@@ -59,7 +59,7 @@ These packages have been verified to exist and work with ckm:
 
 ## Deliverables
 
-- [x] cmd/ckm/main.go
+- [x] cmd/chonkometer/main.go
 - [x] internal/cli/root.go
 - [x] internal/cli/version.go
 - [x] internal/mcp/client.go

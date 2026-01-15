@@ -24,12 +24,12 @@ Stack decisions affect maintainability, performance, and development velocity.
 | MCP Client | Official MCP Go SDK |
 | Token Counting | tiktoken-go |
 | Output Formatting | fmt (stdlib) |
-| Project Structure | cmd/ckm + internal/cli |
+| Project Structure | cmd/chonkometer + internal/cli |
 | Testing | stdlib (testing package) |
 | Build | go build + ldflags |
 | Distribution | Homebrew tap |
 
-CLI binary name: `ckm`
+CLI binary name: `chonkometer`
 
 ## Why
 
@@ -147,7 +147,7 @@ Output:
 
 ```
 chonkometer/
-├── cmd/ckm/main.go           # Entrypoint only
+├── cmd/chonkometer/main.go           # Entrypoint only
 ├── internal/
 │   ├── cli/                  # Cobra commands
 │   │   ├── root.go
@@ -163,5 +163,5 @@ chonkometer/
 ## Version Injection
 
 ```bash
-go build -ldflags "-X github.com/gcarthew/chonkometer/internal/cli.Version=1.0.0" ./cmd/ckm
+go build -ldflags "-X github.com/gcarthew/chonkometer/internal/cli.Version=1.0.0" ./cmd/chonkometer
 ```
