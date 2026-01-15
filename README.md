@@ -47,8 +47,8 @@ Largest tools:
 
 Chonkometer uses tiktoken (cl100k_base) for fast, offline token counting. Validation against Claude's official tokenizer shows tiktoken undercounts by ~19%. The "Claude" estimate applies a 1.23x correction factor.
 
-| Server | Tools | tiktoken | Claude (actual) | Ratio |
-|--------|------:|----------|-----------------|-------|
+| Server | Tools | chonkometer | Claude (actual) | Ratio |
+|--------|------:|-------------|-----------------|-------|
 | Memory | 9 | 3,483 | 4,243 | 1.22x |
 | Sequential Thinking | 1 | 1,183 | 1,400 | 1.18x |
 | Filesystem | 14 | 3,752 | 4,589 | 1.22x |
@@ -82,11 +82,6 @@ go test ./...
 
 ---
 
-## Documentation Driven Development (DDD)
+## Documentation Driven Development
 
-This project uses Documentation Driven Development. Design decisions are documented in Design Records (DRs) before or during implementation.
-
-- DR Writing Guide: [docs/design/dr-writing-guide.md](docs/design/dr-writing-guide.md)
-- Project Writing Guide: [docs/projects/p-writing-guide.md](docs/projects/p-writing-guide.md)
-- Feature Development Workflow: [docs/workflow.md](docs/workflow.md)
-- Design Records: [docs/design/design-records/](docs/design/design-records/)
+This project uses [Documentation Driven Development](https://github.com/grantcarthew/ddd-template).
