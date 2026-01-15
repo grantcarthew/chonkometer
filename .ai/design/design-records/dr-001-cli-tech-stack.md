@@ -1,4 +1,4 @@
-# DR-001: CLI Tech Stack
+# dr-001: CLI Tech Stack
 
 - Date: 2025-12-18
 - Status: Accepted

@@ -2,7 +2,7 @@
 
 Creating and maintaining Design Records.
 
-Location: `docs/design/design-records/dr-NNN-title.md`
+Location: `.ai/design/design-records/dr-NNN-title.md`
 
 Read when: Writing/updating DRs or reconciling docs.
 
@@ -29,8 +29,8 @@ DR structure:
 # DR-NNN: Title
 
 - Date: YYYY-MM-DD
-- Status: Proposed | Accepted | Superseded | Deprecated
-- Category: Configuration | Tasks | CLI | Agents | etc.
+- Status: Accepted | Superseded
+- Category: (technology/component/area)
 ```
 
 ### Required Sections
@@ -69,7 +69,6 @@ Add as needed:
 
 - Structure - Schema definitions, field descriptions
 - Scope - Where/how this applies (global vs local, etc.)
-- Rationale - Detailed reasoning and context
 - Usage Examples - How to use the decision in practice
 - Validation - Rules for correctness
 - Execution Flow - Step-by-step behavior
@@ -82,7 +81,7 @@ Add as needed:
 
 ## What Belongs in DRs
 
-### ✅ Configuration Examples
+### Configuration Examples
 
 Config structure and schema (TOML, JSON, etc.):
 
@@ -104,7 +103,7 @@ ttl = 3600
 
 This is NOT implementation code - it's the schema/structure being defined.
 
-### ✅ Usage Examples
+### Usage Examples
 
 Behavior and command usage:
 
@@ -113,7 +112,7 @@ myapp deploy --environment prod --verbose
 myapp run migration --dry-run "add user index"
 ```
 
-### ✅ Field Descriptions
+### Field Descriptions
 
 Field meanings and constraints:
 
@@ -124,7 +123,7 @@ status (string, required):
 - Default: `"pending"`
 - Immutable once set to `"completed"` or `"failed"`
 
-### ✅ Validation Rules
+### Validation Rules
 
 Validation requirements:
 
@@ -135,17 +134,17 @@ At resource creation:
 - At least one of `endpoint`, `config_file`, or `inline_config` must be present
 - If `ttl` is specified, must be between 60 and 86400 seconds
 
-### ✅ Execution Flows
+### Execution Flows
 
 Step-by-step algorithms:
 
 When `myapp process <job-id>` is executed:
 
 1. Determine retry strategy:
-   - CLI `--retry-policy` flag → use specified policy
-   - Else job `retry_policy` field → use job-specific policy
-   - Else global `default_retry_policy` → use system default
-   - If all fail → use built-in exponential backoff
+   - CLI `--retry-policy` flag - use specified policy
+   - Else job `retry_policy` field - use job-specific policy
+   - Else global `default_retry_policy` - use system default
+   - If all fail - use built-in exponential backoff
 
 2. Execute processing:
    - Load job data from storage
@@ -153,19 +152,19 @@ When `myapp process <job-id>` is executed:
    - Process according to job type
    - Update status atomically
 
-### ✅ Tables and Matrices
+### Tables and Matrices
 
 Scope and behavior matrices:
 
 | Feature      | Free Tier | Pro Tier | Enterprise |
 | ------------ | --------- | -------- | ---------- |
-| API Access   | ✓         | ✓        | ✓          |
+| API Access   | Yes       | Yes      | Yes        |
 | Rate Limit   | 100/hour  | 1000/hr  | Unlimited  |
-| Webhooks     | -         | ✓        | ✓          |
+| Webhooks     | -         | Yes      | Yes        |
 | SLA          | -         | 99.9%    | 99.99%     |
 | Support      | Community | Email    | 24/7 Phone |
 
-### ✅ Breaking Changes Notes
+### Breaking Changes Notes
 
 Historical changes:
 
@@ -174,9 +173,9 @@ Breaking Changes from v1.x:
 1. Changed: `timeout` field now measured in seconds (previously milliseconds)
 2. Removed: `legacy_mode` flag (superseded by compatibility layer)
 3. Added: `retry_strategy` field for configurable retry behavior
-4. Renamed: `endpoint_url` → `endpoint` for consistency
+4. Renamed: `endpoint_url` to `endpoint` for consistency
 
-### ✅ Updates Section
+### Updates Section
 
 Dated updates:
 
@@ -190,7 +189,7 @@ Updates:
 
 ## What Does NOT Belong in DRs
 
-### ❌ Implementation Code
+### Implementation Code
 
 Do not include actual source code (Go, Python, etc.):
 
@@ -205,7 +204,7 @@ Why: DRs capture decisions, not implementation.
 
 Exception: Pseudocode in Why section for complex logic.
 
-### ❌ Cross-Links to Other DRs
+### Cross-Links to Other DRs
 
 Do not link to other DR documents:
 
@@ -216,12 +215,12 @@ Instead: Use `design-records/README.md` index.
 Exception: Link when status changes (superseding/superseded):
 
 ```markdown
-Status: Superseded by [DR-042](../dr-042-new-approach.md)
+Status: Superseded by [dr-042](../dr-042-new-approach.md)
 ```
 
 Note: Superseded DRs are moved to the `superseded/` directory, so they link back up to the main directory using `../`
 
-### ❌ User Documentation Duplication
+### User Documentation Duplication
 
 Do not duplicate content from user docs:
 
@@ -256,8 +255,8 @@ When Unsure, Ask:
 
 Would a future developer need to understand WHY we made this choice?
 
-- Yes → Create a DR
-- No → Just fix it
+- Yes - Create a DR
+- No - Just fix it
 
 ---
 
@@ -281,15 +280,14 @@ Examples:
 
 ### Numbering
 
-- Sequential: DR-001, DR-002, DR-003, etc.
+- Sequential: dr-001, dr-002, dr-003, etc.
 - Gaps are acceptable (superseded DRs)
 - Never reuse numbers
 - Get next number from `design-records/README.md` index
 
 ### Status Values
 
-- Proposed - Under consideration, not implemented
-- Accepted - Approved and in use (or in progress)
+- Accepted - Decision is in effect
 - Superseded - Replaced by newer DR, link in header, move to `superseded/`
 
 ---
@@ -381,7 +379,7 @@ After design changes:
 
 1. Remove deprecated references: `rg "old-pattern" docs/`
 2. Update DR index in `design-records/README.md` with current status
-3. Check DR status accuracy (Proposed → Accepted, Deprecated, Superseded?)
+3. Check DR status accuracy (Accepted, Superseded?)
 4. Remove stale TODOs: `rg "TODO|TBD|to be written" docs/`
 5. Verify examples match current schema
 6. Remove any "Related Decisions" sections from DRs

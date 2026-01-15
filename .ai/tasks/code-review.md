@@ -2,7 +2,7 @@
 
 This document guides AI agents through comprehensive code review using Documentation Driven Development principles.
 
-The primary goal is to ensure code is **correct, maintainable, efficient, and simple**.
+The primary goal is to ensure code is correct, maintainable, efficient, and simple.
 
 ---
 
@@ -12,7 +12,7 @@ The primary goal is to ensure code is **correct, maintainable, efficient, and si
    - README.md
    - AGENTS.md
    - Active project document (from AGENTS.md)
-   - All relevant Design Records (docs/design/design-records/)
+   - All relevant Design Records (.ai/design/design-records/)
 
 2. Read the code being reviewed:
    - Start with entry points (main files, index files)
@@ -252,7 +252,7 @@ API Documentation:
 DR References:
 
 - Are DR references included where design decisions are implemented?
-- Format: `// See DR-042 for authentication strategy`
+- Format: `// See dr-042 for authentication strategy`
 - Are references accurate and up-to-date?
 
 Code Clarity:
@@ -296,7 +296,7 @@ Dependencies:
 
 After completing the review, create a new project document:
 
-File: `docs/projects/p-NNN-code-review-rectification.md`
+File: `.ai/projects/p-NNN-code-review-rectification.md`
 
 Structure:
 

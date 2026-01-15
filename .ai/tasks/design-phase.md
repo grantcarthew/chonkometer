@@ -2,7 +2,7 @@
 
 This document guides AI agents through design work using Documentation Driven Development (DDD).
 
-IMPORTANT: Read `docs/design/dr-writing-guide.md` before continuing. That guide defines how to write Design Records (DRs).
+IMPORTANT: Read `.ai/design/dr-writing-guide.md` before continuing. That guide defines how to write Design Records (DRs).
 
 ---
 
@@ -37,7 +37,7 @@ You are here to:
 4. Discuss trade-offs - What are the pros/cons of each option?
 5. Make decision - User chooses an approach
 6. Document as DR - Create a Design Record following dr-writing-guide.md
-7. Update DR index - Add to docs/design/design-records/README.md
+7. Update DR index - Add to .ai/design/design-records/README.md
 8. Identify follow-up decisions - What new questions does this decision raise?
 9. Repeat - Continue until design is complete (or ready to proceed)
 
@@ -45,8 +45,8 @@ When a decision supersedes an earlier one:
 
 - Create the new DR documenting the new decision
 - Update the old DR's status to "Superseded" and add link to new DR in header
-- Move the old DR file to docs/design/design-records/superseded/
-- Update the DR index (docs/design/design-records/README.md)
+- Move the old DR file to .ai/design/design-records/superseded/
+- Update the DR index (.ai/design/design-records/README.md)
 
 ### When to Create a Design Record
 
@@ -133,10 +133,10 @@ Integration Questions:
 
 ### Reading Order
 
-1. Active project document in docs/projects/ - Current context
-2. docs/design/dr-writing-guide.md - How to write DRs
-3. docs/design/design-records/README.md - DR index
-4. All DRs in docs/design/design-records/ - Design decisions made so far
+1. Active project document in .ai/projects/ - Current context
+2. .ai/design/dr-writing-guide.md - How to write DRs
+3. .ai/design/design-records/README.md - DR index
+4. All DRs in .ai/design/design-records/ - Design decisions made so far
 5. AGENTS.md - General agent guidance and project info
 
 ### Agent Instructions
@@ -159,7 +159,7 @@ During design discussion:
 After each decision:
 
 - Create DR immediately while discussion is fresh
-- Update DR index (docs/design/design-records/README.md)
+- Update DR index (.ai/design/design-records/README.md)
 - Identify new questions that emerged from the decision
 
 ### DR Numbering
@@ -170,7 +170,7 @@ DRs are numbered sequentially starting from 001:
 - `dr-002-second-decision.md`
 - etc.
 
-Always check `docs/design/design-records/README.md` to find the next number.
+Always check `.ai/design/design-records/README.md` to find the next number.
 
 ### Quality Checks
 
@@ -186,7 +186,7 @@ Before creating a DR, ensure:
 
 ## Resources
 
-- DR Writing Guide: `docs/design/dr-writing-guide.md`
-- DR Index: `docs/design/design-records/README.md`
-- Project Writing Guide: `docs/projects/p-writing-guide.md`
+- DR Writing Guide: `.ai/design/dr-writing-guide.md`
+- DR Index: `.ai/design/design-records/README.md`
+- Project Writing Guide: `.ai/projects/p-writing-guide.md`
 - Agent Guide: `AGENTS.md`

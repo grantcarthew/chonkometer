@@ -2,7 +2,7 @@
 
 This document guides AI agents through implementation work using Documentation Driven Development (DDD).
 
-IMPORTANT: All design decisions have been documented as Design Records (DRs) in `docs/design/design-records/`. Implementation must follow these decisions.
+IMPORTANT: All design decisions have been documented as Design Records (DRs) in `.ai/design/design-records/`. Implementation must follow these decisions.
 
 ---
 
@@ -44,7 +44,7 @@ You are here to:
 
 3. Implement
    - Write code following DR decisions
-   - Add comments referencing relevant DRs (e.g., `// See DR-042 for rationale`)
+   - Add comments referencing relevant DRs (e.g., `// See dr-042 for rationale`)
    - Follow established patterns from DRs
 
 4. Test
@@ -83,9 +83,9 @@ Note: Small implementation details don't need DRs. Only create new DRs for decis
 
 ### Reading Order
 
-1. Active project document in docs/projects/ - Current implementation context
-2. docs/design/design-records/README.md - Index of all design decisions
-3. All DRs in docs/design/design-records/ - Complete design (critical!)
+1. Active project document in .ai/projects/ - Current implementation context
+2. .ai/design/design-records/README.md - Index of all design decisions
+3. All DRs in .ai/design/design-records/ - Complete design (critical!)
 4. AGENTS.md - General agent guidance and project info
 5. Existing codebase - What's already implemented
 
@@ -104,8 +104,8 @@ During implementation:
 - Add comments linking code to DRs when implementing decision points
 
   ```python
-  # Use PostgreSQL for persistence (see DR-023)
-  # Chose connection pooling to handle concurrent requests (see DR-031)
+  # Use PostgreSQL for persistence (see dr-023)
+  # Chose connection pooling to handle concurrent requests (see dr-031)
   ```
 
 - If you discover a missing decision, document it and ask
@@ -125,18 +125,18 @@ When implementing a decision point, add a comment:
 Good examples:
 
 ```python
-# Singleton pattern for database connection (DR-015)
+# Singleton pattern for database connection (dr-015)
 class DatabaseConnection:
     _instance = None
 ```
 
 ```javascript
-// Retry with exponential backoff for API calls (DR-028)
+// Retry with exponential backoff for API calls (dr-028)
 async function fetchWithRetry(url, maxRetries = 3) {
 ```
 
 ```go
-// Use channels for worker pool communication (DR-041)
+// Use channels for worker pool communication (dr-041)
 jobs := make(chan Job, 100)
 ```
 
@@ -169,7 +169,7 @@ Sometimes implementation reveals that a design decision needs revision. If this 
 2. Discuss with user - Explain why the decision doesn't work
 3. Create new DR - Document the new decision
 4. Update old DR - Set status to "Superseded" and link to new DR in header
-5. Move old DR - Move the old DR file to docs/design/design-records/superseded/
+5. Move old DR - Move the old DR file to .ai/design/design-records/superseded/
 6. Update DR index - Reflect the superseding relationship
 7. Update code - Implement the new decision
 
@@ -177,7 +177,7 @@ Sometimes implementation reveals that a design decision needs revision. If this 
 
 ## Resources
 
-- DR Index: `docs/design/design-records/README.md`
-- DR Writing Guide: `docs/design/dr-writing-guide.md`
-- Project Writing Guide: `docs/projects/p-writing-guide.md`
+- DR Index: `.ai/design/design-records/README.md`
+- DR Writing Guide: `.ai/design/dr-writing-guide.md`
+- Project Writing Guide: `.ai/projects/p-writing-guide.md`
 - Agent Guide: `AGENTS.md`

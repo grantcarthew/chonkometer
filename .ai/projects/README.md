@@ -10,8 +10,8 @@ See [p-writing-guide.md](./p-writing-guide.md) for guidelines on creating and ma
 
 | Project | Title | Status | Started | Completed |
 |---------|-------|--------|---------|-----------|
-| P-001 | Project Initialization | Completed | 2025-12-18 | 2025-12-18 |
-| P-002 | Core CLI Functionality | Completed | 2025-12-18 | 2026-01-13 |
+| p-001 | Project Initialization | Completed | 2025-12-18 | 2025-12-18 |
+| p-002 | Core CLI Functionality | Completed | 2025-12-18 | 2026-01-13 |
 
 Note: Completed projects are in `completed/`
 
@@ -42,7 +42,7 @@ See [p-writing-guide.md](./p-writing-guide.md) for detailed guidance.
 
 When creating a new project:
 
-1. List directory to find next number: `ls docs/projects/p-*.md`
+1. List directory to find next number: `ls .ai/projects/p-*.md`
 2. Use format: `p-<NNN>-<category>-<title>.md`
 3. Follow the structure in [p-writing-guide.md](./p-writing-guide.md)
 4. Define clear, measurable success criteria

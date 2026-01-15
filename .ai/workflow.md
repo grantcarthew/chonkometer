@@ -4,10 +4,10 @@ An interactive, step-by-step workflow for developing features collaboratively wi
 
 ## Principles
 
-- **Interactive**: Each step requires user involvement before proceeding
-- **Collaborative**: Agent presents findings and options; user decides
-- **Flexible**: User can skip steps or revisit earlier ones
-- **Conversational**: This is a dialogue, not autonomous execution
+- Interactive: Each step requires user involvement before proceeding
+- Collaborative: Agent presents findings and options; user decides
+- Flexible: User can skip steps or revisit earlier ones
+- Conversational: This is a dialogue, not autonomous execution
 
 ## When to Use
 
@@ -38,13 +38,14 @@ Have an interactive discussion about:
 - Implementation approaches
 - Trade-offs between options
 - Questions that need answers
-- Decisions that need to be made
+
+If decisions cannot be made now, add them to the project's Decision Points section for later resolution.
 
 Do not proceed until the user is satisfied with the direction.
 
 ### 4. Create Design Record
 
-Read dr-writing-guide.md for DR structure.
+Read `.ai/design/dr-writing-guide.md` for DR structure.
 
 Draft a design record covering:
 
@@ -86,6 +87,12 @@ Update the project document:
 - Add progress notes
 - Identify next feature
 
+If all success criteria are met:
+
+- Move project to `.ai/projects/completed/`
+- Update `.ai/projects/README.md` with completion date
+- Update `AGENTS.md` to set next project as active
+
 ### 9. Repeat
 
 Return to step 1 for the next feature.
@@ -94,9 +101,9 @@ Return to step 1 for the next feature.
 
 Users may:
 
-- **Skip step 4** for simple features not requiring a DR
-- **Combine steps** when appropriate
-- **Revisit earlier steps** if new information emerges
-- **End the session** at any step and resume later
+- Skip step 4 for simple features not requiring a DR
+- Combine steps when appropriate
+- Revisit earlier steps if new information emerges
+- End the session at any step and resume later
 
 Always confirm with the user before proceeding to the next step.
